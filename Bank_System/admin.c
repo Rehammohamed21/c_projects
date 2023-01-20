@@ -9,7 +9,7 @@
 #include "admin.h"
 
 
-#define MIN_ID		20000000000000
+#define MIN_ID		20000000000000			
 #define MAX_ID		99999999999999
 
 
@@ -20,7 +20,7 @@ static uint64 bank_id = 1000000000;
 
 acc * head_ptr = NULL;
 
-void create_new_acc(acc ** head)
+void create_new_acc(void)
 {
 
 	acc * new = (acc *)malloc(sizeof(acc));
@@ -83,21 +83,8 @@ void create_new_acc(acc ** head)
 		printf("Status      --> %s\n",new -> status);
 		bank_id++;
 		
-		new -> next = NULL;
-		
-		if(*head == NULL)
-		{
-			*head = new;
-		}
-		else
-		{
-			acc * current = * head;
-			while(current -> next != NULL)
-			{
-				current = current -> next;
-			}
-			current -> next = new;
-		}
+		new -> next = head_ptr;
+		head_ptr = new;
 		
 	}
 	else
@@ -382,3 +369,46 @@ uint16 check_id( uint64 id_check)
 	
 }
 
+uint16 verify_admin(void)
+{
+	uint8 username_admin[50];
+	uint32 pass_admin;
+	uint8 u_name[] = "Admin" ;
+	uint32 u_pass = 1234;
+	uint16 i=0;
+	
+	do
+	{
+		fflush(stdin);
+		printf("\n\n\t\t\tUsername: ");
+		scanf("%[^\n]s", username_admin);
+		printf("\t\t\tPassword: ");
+		scanf("%lu", &pass_admin);
+		if((strcmp(username_admin, u_name) == 0) && (pass_admin == u_pass))		//check if the password and username is right
+		{
+			return 1;
+		}
+		else
+		{
+			i++;
+			if(i >= 2)						//if enter wrong password and username 2 times 
+			{
+				printf("\n\t\t\tusername or password is wrong system will exit\n");
+				Sleep(1500);
+				return 0;
+			}
+			else					
+			{
+				
+				printf("\n\t\t\tusername or password is wrong try again\n");			//if enter wrong password or username
+				Sleep(1500);
+				system("cls");
+			}	
+		}
+		
+	}while(i != 2);
+	
+	
+	
+	
+}

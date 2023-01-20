@@ -18,12 +18,13 @@ typedef struct account
 
 uint16 check_name(const uint8* name_check);
 uint16 check_id( uint64 id_check);
-void create_new_acc(acc ** head);
+void create_new_acc(void);
 uint16 open_existing_account(void);
 void make_transaction(acc * acc_ptr );
 void change_account_status(acc * acc_ptr);
 void get_cash(acc * acc_ptr);
 void deposit_in_acc(acc * acc_ptr);
 void get_label(void);
+uint16 verify_admin(void);
 
 #endif

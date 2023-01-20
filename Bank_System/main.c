@@ -6,12 +6,10 @@
 #include "admin.h"
 #include "client.h"
 
-extern acc * head_ptr;
-
 int main(void)
 {
 	uint8 ch,ch1,ch2,ch3;
-	uint16 res1, res2;
+	uint16 res1, res2,res3;
 	//clear screan
 	system("cls");
 	goto options;
@@ -23,46 +21,57 @@ int main(void)
 	system("cls");
 	if (ch1 == 1)
 	{
-		Admin:
 		system("cls");
-		printf("\n\t\t\tWelcome to Admin Window\n\n");
-		printf("1 --> Create new account \n2 --> Open existing account \n3 --> Return main menue \n4 --> Exit system \n\n");
-		printf("Please enter your choice: ");
-		scanf("%d",&ch2);
-		system("cls");
-		printf("\n\t\t\tAdmin Window\n\n");
-		switch(ch2)
+		res3 = verify_admin();
+		if (res3 == 0)
 		{
-			case 1: create_new_acc(&head_ptr);
-					printf("\nTo return  to main menu enter \"1\" or any to exit\n");
-					printf("Please enter your choice: ");
-					scanf("%d",&ch3);
-					if (ch3 == 1)			//return to main menu
-					{
-						goto Admin;
-					}
-					else
-					{
-						system("cls");
-						goto end;			//exit
-					}
-					break;
-			case 2: res1 = open_existing_account();
-					if(res1 == 0)
-					{
-						Sleep(1500);
-					}
-					goto Admin;
-					break;
-			case 3: goto options;
-			case 4: system("cls");
-					goto end;
-					break;
-			default: printf("Wrong choice\n"); 
-					 Sleep(1500);
-					 goto Admin; 				//if the entered choice is not exist it will return to menu 
-					 break;
+			system("cls");
+			goto end;		//exit system if the username and password of admin is wrong
 		}
+		else if (res3 == 1)
+		{
+			Admin:
+			system("cls");
+			printf("\n\t\t\tWelcome to Admin Window\n\n");
+			printf("1 --> Create new account \n2 --> Open existing account \n3 --> Return main menue \n4 --> Exit system \n\n");
+			printf("Please enter your choice: ");
+			scanf("%d",&ch2);
+			system("cls");
+			printf("\n\t\t\tAdmin Window\n\n");
+			switch(ch2)
+			{
+				case 1: create_new_acc();
+						printf("\nTo return  to main menu enter \"1\" or any to exit\n");
+						printf("Please enter your choice: ");
+						scanf("%d",&ch3);
+						if (ch3 == 1)			//return to main menu
+						{
+							goto Admin;
+						}
+						else
+						{
+							system("cls");
+							goto end;			//exit
+						}
+						break;
+				case 2: res1 = open_existing_account();
+						if(res1 == 0)
+						{
+							Sleep(1500);
+						}
+						goto Admin;
+						break;
+				case 3: goto options;
+				case 4: system("cls");
+						goto end;
+						break;
+				default: printf("Wrong choice\n"); 
+						 Sleep(1500);
+						 goto Admin; 				//if the entered choice is not exist it will return to menu 
+						 break;
+			}
+		}
+		
 	}
 	else if (ch1 == 2)
 	{

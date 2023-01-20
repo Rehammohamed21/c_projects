@@ -91,7 +91,7 @@ uint16 open_existing_account_c(void)
 			op:
 			system("cls");
 		    printf("\n\t\t\tClient Window\n\n");
-			printf("1 --> Make transaction \n2 --> Chang account Password \n3 --> Get cash \n4 --> Deposit in account \n5 --> Return to main menu \n6 --> Exit system\n\n");
+			printf("1 --> Make transaction \n2 --> Chang account Password \n3 --> Get cash \n4 --> Deposit in account \n5 --> Exit system\n\n");
 			printf("Please enter your choice: ");
 			scanf("%d",&ch_ac);
 			system("cls");
@@ -157,9 +157,9 @@ uint16 open_existing_account_c(void)
 							return 1;
 						}  
 						break;
-				case 5: goto op; 
-				case 6: return 1;
-				default: printf("Wrong choice\n"); Sleep(1500); 
+				case 5: return 1;
+				default: printf("Wrong choice\n"); 
+						 Sleep(1500); 
 						 goto op;	   break;
 			}	
 			
